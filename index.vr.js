@@ -1,4 +1,5 @@
 import React from 'react';
+import Moment from 'moment';
 import {
   AppRegistry,
   asset,
@@ -8,9 +9,9 @@ import {
   View,
   VrButton,
 } from 'react-vr';
+const moment = require('moment')
 
 export default class vr_workshop extends React.Component {
-
   constructor(props){
     super(props);
     this.state = {
@@ -35,6 +36,12 @@ export default class vr_workshop extends React.Component {
       })
   }
 
+  epochConvert(seconds){
+    var d = new Date(0);
+    d.setUTCSeconds(seconds);
+    return d;
+  }
+
   render() {
     return (
       <View>
@@ -51,7 +58,8 @@ export default class vr_workshop extends React.Component {
             textAlignVertical: 'center',
             transform: [{translate: [0, 0, -5]}],
           }}>
-        Destination: {this.state.foliData.length > 0 ? this.state.foliData[0].destinationdisplay:"no data"}
+        Line {this.state.foliData.length ? this.state.foliData[0].lineref:"no data"} to {this.state.foliData.length ? this.state.foliData[0].destinationdisplay:"no data"}
+        
         </Text>
         <Text
           style={{
@@ -65,7 +73,7 @@ export default class vr_workshop extends React.Component {
             textAlignVertical: 'center',
             transform: [{translate: [0, 0, -5]}],
           }}>
-        Departure: {this.state.foliData.length > 0 ? this.state.foliData[0].originaimeddeparturetime:"no data"}
+        Departure: {this.state.foliData.length ? moment.unix(this.state.foliData[0].aimeddeparturetime).local().format('HH:mm') :"no data"}
         </Text>
         <VrButton
             style={{
