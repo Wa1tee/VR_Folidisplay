@@ -36,12 +36,6 @@ export default class vr_workshop extends React.Component {
       })
   }
 
-  epochConvert(seconds){
-    var d = new Date(0);
-    d.setUTCSeconds(seconds);
-    return d;
-  }
-
   render() {
     return (
       <View>
